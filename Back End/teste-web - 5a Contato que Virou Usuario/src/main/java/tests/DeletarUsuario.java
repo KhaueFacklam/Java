@@ -1,0 +1,26 @@
+package tests;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Usuario;
+import persist.UsuarioDAO;
+
+@WebServlet("/deletarUsuario")
+public class DeletarUsuario extends HttpServlet {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		UsuarioDAO cdao = new UsuarioDAO();
+
+		long id = Long.parseLong(req.getParameter("id"));
+		Usuario u = cdao.getUsuario(id);
+		cdao.remover(u);
+
+	}
+}
